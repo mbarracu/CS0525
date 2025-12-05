@@ -1,0 +1,52 @@
+import datetime                                                             
+
+while True                                                                  
+    comando_utente = input("Cosa vuoi sapere? ")                            
+    if comando_utente == "esci":                                            
+        print("Arrivederci!")
+    break                                                                   
+    else:
+        print(assistente_virtuale(comando_utente))                          
+
+def assistente_virtuale(comando):
+    if comando == "Qual è la data di oggi?":
+        oggi = datetime.datetoday()                                         
+        risposta = "La data di oggi è " + oggi.strftime("%d/%m/%Y")         
+    elif comando == "Che ore sono?":
+        ora_attuale = datetime.datetime.now().time()                        
+        risposta = "L'ora attuale è " + ora_attuale.strftime("%H:%M")
+    elif comando == "Come ti chiami?":
+        risposta = "Mi chiamo Assistente Virtuale"
+    else:
+        risposta = "Non ho capito la tua domanda."
+    return risposta                                                         
+
+# DESCRIZIONE DEL PROGRAMMA
+# Il programma simula un assistente virtuale che, in base alla richiesta dell'utente,
+# restituisce la data odierna, l'ora attuale oppure il proprio nome.
+# Per domande diverse da quelle previste, dovrebbe rispondere con "Non ho capito la tua domanda.".
+# Allo stato attuale, però, il ciclo termina sempre dopo il primo input perché il break è fuori dall'if.
+# Inoltre il programma chiamerebbe la funzione assistente_virtuale() prima che la sua definizione
+# venga eseguita, causando un errore di esecuzione.
+
+# LIMITI RISPETTO A CASI REALI (CASISTICHE NON STANDARD)
+# - Il comando di uscita funziona solo se l’utente scrive esattamente "esci":
+#   varianti come "Esci", "ESCI" o con spazi aggiuntivi non vengono riconosciute.
+# - Le domande riconosciute devono essere identiche alle stringhe previste
+#   (maiuscole/minuscole, spazi, punteggiatura). Una minima variazione porta
+#   sempre alla risposta "Non ho capito la tua domanda.".
+# - Non è gestito in modo esplicito il caso di input vuoto (solo Invio).
+
+# SUGGERIMENTI / MIGLIORAMENTI
+# - Introdurre una funzione main() che contenga il ciclo principale, per migliorare la struttura.
+# - Estrarre parole chiave dalle frasi per riconoscere le richieste in modo meno rigido.
+# - Normalizzare le richieste dell'utente (es. .strip().lower()) per gestire differenze di maiuscole/minuscole.
+# - Aggiungere una semplice validazione dell'input (gestione stringhe vuote, input non previsto).
+# - Assicurarsi di usare correttamente le funzioni di datetime per ottenere data e ora locali.
+
+# ERRORI INDIVIDUATI
+# - Manca il ":" dopo while True (nella versione riportata). (line 3)
+# - Il break è indentato fuori dal blocco if, quindi il ciclo while termina sempre dopo il primo giro. (line 7)
+# - Per l'indentazione del break, l'else non ha senso in questo contesto. (line 8)
+# - La funzione assistente_virtuale() viene chiamata nel while prima che la sua definizione venga eseguita. (line 9)
+# - Viene usata la funzione inesistente datetime.datetoday(). (line 13)
